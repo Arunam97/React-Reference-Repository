@@ -105,3 +105,38 @@ export const createFiltersWithBuyerUserId = (jsonData, currentBuyerFilters) => {
 
   return newFilters;
 };
+
+export const extractPreselectedValues = (buyerFilters) => {
+  // Initialize the structure of preselected values
+  const preselected = {
+    Vendor: [],
+    "Department and Fineline": []
+  };
+
+  // Loop through each filter object in the buyerFilters array
+  buyerFilters.forEach((filter) => {
+    // Check for VNDR_NAME and extract its values if present
+    if (filter.VNDR_NAME) {
+      filter.VNDR_NAME.conditions.forEach((condition) => {
+        if (!preselected.Vendor.includes(condition.filterValue)) {
+          preselected.Vendor.push(condition.filterValue);
+        }
+      });
+    }
+
+    // Check for DEPT_FINELINE and extract its values if present
+    if (filter.DEPT_FINELINE) {
+      filter.DEPT_FINELINE.conditions.forEach((condition) => {
+        if (
+          !preselected["Department and Fineline"].includes(
+            condition.filterValue
+          )
+        ) {
+          preselected["Department and Fineline"].push(condition.filterValue);
+        }
+      });
+    }
+  });
+
+  return preselected;
+};
