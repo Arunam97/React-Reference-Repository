@@ -140,3 +140,62 @@ export const extractPreselectedValues = (buyerFilters) => {
 
   return preselected;
 };
+
+export const addDateFilter = (
+  currentFilters,
+  startDate,
+  endDate,
+  optionalLabel = null
+) => {
+  const isValidDate = (date) => !isNaN(new Date(date).getTime());
+
+  // Make a shallow copy of currentFilters to ensure it's mutable
+  let filters = currentFilters.map((filter) => ({ ...filter }));
+
+  // Check if the start or end date is invalid
+  const isStartDateInvalid = !isValidDate(startDate) || startDate === "";
+  const isEndDateInvalid = !isValidDate(endDate) || endDate === "";
+
+  // Define primary label constants
+  const MIN_DATE = "MIN_DATE";
+  const ABCD = "ABCD";
+
+  // Determine the label to use
+  const label = optionalLabel === ABCD ? ABCD : MIN_DATE;
+
+  // Find the index of both labels
+  const minDateIndex = filters.findIndex((filter) =>
+    Object.prototype.hasOwnProperty.call(filter, MIN_DATE)
+  );
+  const abcdIndex = filters.findIndex((filter) =>
+    Object.prototype.hasOwnProperty.call(filter, ABCD)
+  );
+
+  // Remove both labels initially
+  if (minDateIndex !== -1) filters.splice(minDateIndex, 1);
+  if (abcdIndex !== -1) filters.splice(abcdIndex, 1);
+
+  // If either date is invalid, return filters without adding any new date filter
+  if (isStartDateInvalid || isEndDateInvalid) {
+    return filters;
+  }
+
+  // Define the filter structure with the provided dates
+  const dateFilter = {
+    [label]: {
+      filterType: "date",
+      conditions: [
+        {
+          type: "inRange",
+          filterValue: startDate,
+          filterValueto: endDate
+        }
+      ]
+    }
+  };
+
+  // Add the new label to the filters
+  filters.push(dateFilter);
+
+  return filters; // Return the modified filters array
+};

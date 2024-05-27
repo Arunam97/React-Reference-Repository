@@ -37,8 +37,8 @@ export const CustomDatePicker = ({ startDate, endDate, handleSubmit }) => {
     selectedStartDate.isValid() &&
     selectedEndDate.isValid() &&
     selectedEndDate.isAfter(selectedStartDate) &&
-    selectedStartDate.isAfter(dayjs(startDate)) &&
-    selectedEndDate.isBefore(dayjs(endDate));
+    selectedStartDate.isAfter(dayjs(startDate) - 1) &&
+    selectedEndDate.isBefore(dayjs(endDate) + 1);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

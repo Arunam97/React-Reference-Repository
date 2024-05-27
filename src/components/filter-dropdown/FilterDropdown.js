@@ -70,6 +70,10 @@ function FilterDropdown({ filters, onApply, hide = [] }) {
       });
   };
 
+  const isAnySelected = Object.values(selectedValues).some(
+    (selectedArray) => selectedArray.length > 0
+  );
+
   if (hide.length === Object.keys(filters).length) {
     return null; // Hides the entire component if all filters are in the hide array
   }
@@ -116,7 +120,11 @@ function FilterDropdown({ filters, onApply, hide = [] }) {
         <Button onClick={handleReset} variant="outlined">
           Reset
         </Button>
-        <Button onClick={handleApply} variant="contained">
+        <Button
+          onClick={handleApply}
+          variant="contained"
+          disabled={!isAnySelected}
+        >
           Apply
         </Button>
       </Box>

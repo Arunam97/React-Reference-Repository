@@ -4,11 +4,11 @@ import { Box } from "@mui/material";
 import { filter_dropdown_mock } from "./mock";
 import FilterDropdown from "./FilterDropdown";
 import { BuyerFiltersAtom } from "./BuyerFiltersAtom";
-
 import {
   transformUIToFilters,
   createFiltersWithBuyerUserId
 } from "../../config/util";
+import { DatePickerWrapper } from "../date-picker/date-picker-wrapper";
 
 export const FilterDropdownWrapper = () => {
   const [buyerFilters, setBuyerFilters] = useRecoilState(BuyerFiltersAtom);
@@ -33,26 +33,12 @@ export const FilterDropdownWrapper = () => {
     setBuyerFilters(newRecoilFilters);
   };
 
-  function removeFilterField(jsonArray, keyToRemove) {
-    // Filter out the object that contains the key to remove
-    const updatedArray = jsonArray.filter(
-      (item) => !item.hasOwnProperty(keyToRemove)
-    );
-    return updatedArray;
-  }
-
   // Use preselectedValues as a dependency to change the key when they change
   return (
     <Box>
       <FilterDropdown filters={filter_dropdown_mock} onApply={handleApply} />
+      <DatePickerWrapper />
       <pre>{JSON.stringify(buyerFilters, null, 2)}</pre>
-      <pre>
-        {JSON.stringify(
-          removeFilterField(buyerFilters, "DEPT_FINELINE"),
-          null,
-          2
-        )}
-      </pre>
     </Box>
   );
 };
