@@ -5,6 +5,7 @@ import { FilterDropdownWrapper } from "../components/filter-dropdown/filter-drop
 import { BreadcrumbsLinksWrapper } from "../components/breadcrumbs-links/breadcrumbs-links-wrapper";
 import { DatePickerWrapper } from "../components/date-picker/date-picker-wrapper";
 import MuiTableWrapper from "../components/mui-table/mui-table-wrapper";
+import FileUploadWrapper from "../components/file-upload/file-upload-wrapper";
 
 // Define a component for managing routes
 const AppRoutes = () => {
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       <Route path="breadcrumbs" element={<BreadcrumbsLinksWrapper />} />
       <Route path="date-picker" element={<DatePickerWrapper />} />
       <Route path="mui-table" element={<MuiTableWrapper />} />
+      <Route path="file-upload" element={<FileUploadWrapper />} />
       <Route path="*" element={<p>404</p>} />
     </Routes>
   );

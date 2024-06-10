@@ -31,23 +31,23 @@ const MuiDataGrid = ({
     setIsDialogOpen(false);
   };
 
-  const handleFormSubmit = (formData) => {
-    const newRow = {};
-    columns.forEach((column) => {
-      newRow[column.field] = formData[column.field];
-    });
+  // const handleFormSubmit = (formData) => {
+  //   const newRow = {};
+  //   columns.forEach((column) => {
+  //     newRow[column.field] = formData[column.field];
+  //   });
 
-    rows.push(newRow);
-    setIsDialogOpen(false);
-  };
+  //   rows.push(newRow);
+  //   setIsDialogOpen(false);
+  // };
 
   const rowsWithIds = rows.map((row, index) => ({ id: index, ...row }));
 
   // Extract the data object based on the columns definition
-  const data = columns.reduce((acc, column) => {
-    acc[column.field] = ""; // Initialize with an empty string for simplicity
-    return acc;
-  }, {});
+  // const data = columns.reduce((acc, column) => {
+  //   acc[column.field] = ""; // Initialize with an empty string for simplicity
+  //   return acc;
+  // }, {});
 
   return (
     <>
@@ -75,12 +75,12 @@ const MuiDataGrid = ({
       <Dialog open={isDialogOpen} onClose={handleCloseDialog}>
         <DialogTitle>Add Row</DialogTitle>
         <DialogContent>
-          <ControlledForm
+          {/* <ControlledForm
             config={controlledFormConfig}
             data={data}
             handleSubmit={handleFormSubmit}
             handleReset={handleCloseDialog} // Close dialog on reset
-          />
+          /> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>
