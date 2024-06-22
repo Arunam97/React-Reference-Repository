@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@amcharts/amcharts5": "^5.7.4",
+    "@amcharts/amcharts5": "^5.6.2",
     "@date-io/dayjs": "^3.0.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
